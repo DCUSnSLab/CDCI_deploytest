@@ -21,6 +21,31 @@ node {
         """
         sh "ls -al"
         sh "ls -al dist"
+        sh """
+        tar cvf dist.tar ./dist/
+        """
+    }
+
+    stage('SSH transfer') {
+        steps([$class: 'BapSshPromotionPublisherPlugin']) {
+            sshPublisher(
+                continueOnError: false, failOnError: true,
+                publishers: [
+                    sshPublisherDesc(
+                        configName: "dcusnslab",//Jenkins 시스템 정보에 사전 입력한 서버 ID
+                        verbose: true,
+                        transfers: [
+                            sshTransfer(
+                                sourceFiles: "dist.tar", //전송할 파일
+                                removePrefix: "", //파일에서 삭제할 경로가 있다면 작성
+                                remoteDirectory: "/static_files" //배포할 위치
+                                execCommand: "ls -al /static_files" //원격지에서 실행할 커맨드
+                            )
+                        ]
+                    )
+                ]
+            )
+        }
     }
 
     stage('Complete') {
