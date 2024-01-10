@@ -27,17 +27,33 @@ node {
     }
 
     stage('SSH transfer') {
-        sshPublisher(
-          continueOnError: false,
-          failOnError: true,
-          publishers: [
-            sshPublisherDesc(
-              configName: "snslab_ssh",
-              transfers: [sshTransfer(sourceFiles: 'dist.jar')],
-              verbose: true
+        script {
+            sshPublisher(
+              continueOnError: false,
+              failOnError: true,
+              publishers: [
+                sshPublisherDesc(
+                  configName: "snslab_ssh",
+                  transfers: [
+                        sshTransfer(
+                            cleanRemote: false,
+                            excludes: '',
+                            execCommand: '',
+                            execTimeout: 120000,
+                            flatten: false,
+                            makeEmptyDirs: false,
+                            noDefaultExcludes: false,
+                            patternSeparator: '[, ]+',
+                            remoteDirectory: '/static_files',
+                            remoteDirectorySDF: false,
+                            sourceFiles: 'dist.jar')],
+                            usePromotionTimestamp: false,
+                            useWorkspaceInPromotion: false,
+                            verbose: true
+                )
+              ]
             )
-          ]
-        )
+        }
     }
 
     stage('Complete') {
