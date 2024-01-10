@@ -33,7 +33,7 @@ node {
           publishers: [
             sshPublisherDesc(
               configName: "snslab_ssh",
-              transfers: [sshTransfer(sourceFiles: 'dist.jar', remoteDirectory: '/static_files')],
+              transfers: [sshTransfer(sourceFiles: 'dist.jar')],
               verbose: true
             )
           ]
