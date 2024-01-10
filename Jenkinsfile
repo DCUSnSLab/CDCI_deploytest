@@ -28,8 +28,6 @@ node {
 
     stage('SSH transfer') {
         sshPublisher(
-          continueOnError: false,
-          failOnError: true,
           publishers: [
             sshPublisherDesc(
               configName: "snslab_ssh",
