@@ -37,7 +37,7 @@ node {
                     sshTransfer(
                         cleanRemote: false,
                         excludes: '',
-                        //execCommand: 'sh /home/skan/server.sh stop;sh /home/skan/server.sh start'
+                        execCommand: ''
                         execTimeout: 120000,
                         flatten: false,
                         makeEmptyDirs: false,
@@ -45,13 +45,10 @@ node {
                         patternSeparator: '[, ]+',
                         remoteDirectory: '/static_files',
                         remoteDirectorySDF: false,
-                        //removePrefix: 'build/libs',
                         sourceFiles: 'dist.jar')],
                         usePromotionTimestamp: false,
                         useWorkspaceInPromotion: false,
                         verbose: true
-                    )
-              ]
             )
           ]
         )
