@@ -23,6 +23,7 @@ node {
         sh "ls -al dist"
         sh """
         tar cvf dist.tar ./dist/
+        pwd
         """
     }
 
