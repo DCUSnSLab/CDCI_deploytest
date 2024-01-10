@@ -33,8 +33,25 @@ node {
           publishers: [
             sshPublisherDesc(
               configName: "snslab_ssh",
-              transfers: [sshTransfer(sourceFiles: 'dist.jar')],
-              verbose: true
+              transfers: [
+                    sshTransfer(
+                        cleanRemote: false,
+                        excludes: '',
+                        //execCommand: 'sh /home/skan/server.sh stop;sh /home/skan/server.sh start'
+                        execTimeout: 120000,
+                        flatten: false,
+                        makeEmptyDirs: false,
+                        noDefaultExcludes: false,
+                        patternSeparator: '[, ]+',
+                        remoteDirectory: '/static_files',
+                        remoteDirectorySDF: false,
+                        //removePrefix: 'build/libs',
+                        sourceFiles: 'dist.jar')],
+                        usePromotionTimestamp: false,
+                        useWorkspaceInPromotion: false,
+                        verbose: true
+                    )
+              ]
             )
           ]
         )
