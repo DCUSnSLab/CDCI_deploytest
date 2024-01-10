@@ -37,7 +37,7 @@ node {
                     sshTransfer(
                         cleanRemote: false,
                         excludes: '',
-                        execCommand: ''
+                        execCommand: '',
                         execTimeout: 120000,
                         flatten: false,
                         makeEmptyDirs: false,
