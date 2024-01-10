@@ -24,6 +24,7 @@ node {
         sh """
         tar cvf dist.tar ./dist/
         pwd
+        ls -al
         """
     }
 
@@ -47,7 +48,7 @@ node {
                             patternSeparator: '[, ]+',
                             remoteDirectory: '/static_files',
                             remoteDirectorySDF: false,
-                            sourceFiles: 'dist.jar')],
+                            sourceFiles: '/home/jenkins/agent/workspace/CDCI_deploytest/dist.jar')],
                             usePromotionTimestamp: false,
                             useWorkspaceInPromotion: false,
                             verbose: true
