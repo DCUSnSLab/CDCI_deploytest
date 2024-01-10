@@ -38,19 +38,7 @@ node {
                   configName: "snslab_ssh",
                   transfers: [
                         sshTransfer(
-                            cleanRemote: false,
-                            excludes: '',
-                            execCommand: '',
-                            execTimeout: 120000,
-                            flatten: false,
-                            makeEmptyDirs: false,
-                            noDefaultExcludes: false,
-                            patternSeparator: '[, ]+',
-                            remoteDirectory: '/static_files',
-                            remoteDirectorySDF: false,
                             sourceFiles: '/home/jenkins/agent/workspace/CDCI_deploytest/dist.jar')],
-                            usePromotionTimestamp: false,
-                            useWorkspaceInPromotion: false,
                             verbose: true
                 )
               ]
