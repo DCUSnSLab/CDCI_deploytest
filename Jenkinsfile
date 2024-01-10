@@ -13,10 +13,12 @@ node {
 
     //dockerfile기반 빌드하는 stage ,git소스 root에 dockerfile이 있어야한다
     stage('Build image'){
-        sh "mkdir dist"
-        sh "ls -al"
         app = docker.build("harbor.cu.ac.kr/cdcitest/nodejsdeploy")
-        app.inside('-u root -v dist:/app'){}
+        sh """
+        docker run --name sample -d -u root harbor.cu.ac.kr/cdcitest/nodejsdeploy
+        docker cp sample:/app/dist .
+        docker rm -f sample
+        """
         sh "ls -al"
         sh "ls -al dist"
     }
