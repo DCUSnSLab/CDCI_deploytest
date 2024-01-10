@@ -32,7 +32,7 @@ node {
           failOnError: true,
           publishers: [
             sshPublisherDesc(
-              configName: "dcusnslab",
+              configName: "snslab_ssh",
               transfers: [sshTransfer(sourceFiles: 'dist.jar', remoteDirectory: '/static_files')],
               verbose: true
             )
