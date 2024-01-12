@@ -28,23 +28,11 @@ node {
         """
     }
 
-    stage('SSH transfer') {
-        script {
-            sshPublisher(
-              continueOnError: false,
-              failOnError: true,
-              publishers: [
-                sshPublisherDesc(
-                  configName: "snslab_ssh",
-                  transfers: [
-                        sshTransfer(
-                            sourceFiles: '/home/jenkins/agent/workspace/CDCI_deploytest/dist.jar')],
-                            verbose: true
-                )
-              ]
-            )
+    stage("Publish on SSH") {
+            steps {
+                sshPublisher(publishers: [sshPublisherDesc(configName: 'snslab_ssh', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: '', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '/static_files', remoteDirectorySDF: false, removePrefix: '', sourceFiles: 'dist.tar')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: true)])
+            }
         }
-    }
 
     stage('Complete') {
         sh "echo 'The end'"
