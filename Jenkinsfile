@@ -22,7 +22,8 @@ node {
         sh "ls -al"
         sh "ls -al dist"
         sh """
-        tar cvf dist.tar ./dist/
+        tar czvf latest.tar.gz -C dist .
+        cp latest.tar.gz dist_${env.BUILD_NUMBER}.tar.gz
         pwd
         ls -al
         """
@@ -30,7 +31,7 @@ node {
 
     stage("Publish on SSH") {
 
-        sshPublisher(publishers: [sshPublisherDesc(configName: 'snslab_ssh', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: '', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '/static_files', remoteDirectorySDF: false, removePrefix: '', sourceFiles: 'dist.tar')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: true)])
+        sshPublisher(publishers: [sshPublisherDesc(configName: 'snslab_ssh', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: '', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '/static_files', remoteDirectorySDF: false, removePrefix: '', sourceFiles: '*.tar.gz')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: true)])
 
     }
 
