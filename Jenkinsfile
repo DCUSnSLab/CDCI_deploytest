@@ -23,7 +23,7 @@ node {
         sh "ls -al dist"
         sh """
         tar czvf latest.tar.gz -C dist .
-        cp latest.tar.gz dist_${env.BUILD_NUMBER}.tar.gz
+        cp latest.tar.gz build_${env.BUILD_NUMBER}.tar.gz
         pwd
         ls -al
         """
